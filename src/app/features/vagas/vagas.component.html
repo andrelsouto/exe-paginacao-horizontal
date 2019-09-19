@@ -1,0 +1,5 @@
+<div *ngFor="let setor of vagas" class="card-group">
+    <button [disabled]="setor.setor_page === 1" type="button" class="btn btn-outline-primary float-left" (click)="backPage(setor)"><i class="fa fa-angle-left"></i></button>
+    <est-card *ngFor="let v of setor.qtd_vagas | perPage : setor.qtd_vagas.length : perPage : setor.setor_page; index as i" [vaga]="v" [left]="left"></est-card>
+    <button [disabled]="setor.max_pages === setor.setor_page" type="button" class="btn btn-outline-primary float-rigth" (click)="addPage(setor)"><i class="fa fa-angle-right"></i></button>
+</div>
