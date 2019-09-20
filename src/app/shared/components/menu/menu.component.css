@@ -1,0 +1,22 @@
+.side-bar {
+    height: 100vh;
+    border-right: 1px solid rgb(0, 0, 0,.1);
+}
+
+@media screen and (min-width: 767px) {
+    .side-bar-icon {
+        display: none;
+    }
+}
+@media screen and (max-width: 767px) {
+    .side-bar {
+        float: left;
+    }
+    .side-bar-icon i:hover {
+        cursor: pointer;
+    }
+}
+
+:host {
+    width: 100%;
+}

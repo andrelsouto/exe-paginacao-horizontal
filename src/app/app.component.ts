@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'est-root',
   template: `
-    <div class="container-fluid">
-      <router-outlet></router-outlet>
+    <div class="d-flex">
+        <est-menu></est-menu>
     </div>
   `,
   styles: []

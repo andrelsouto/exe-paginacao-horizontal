@@ -5,7 +5,7 @@ export const flyLeftToRigthAnimation =
         state('in', style({transform: 'translateX(0)'})),
         transition(':enter', [
         style({transform: 'translateX(100%)'}),
-        animate(300)
+        animate(150)
         ])
     ]);
 
@@ -14,6 +14,6 @@ export const flyRigthToLeftAnimation =
         state('in', style({transform: 'translateX(0)'})),
         transition(':enter', [
         style({transform: 'translateX(-100%)'}),
-        animate(300)
+        animate(150)
         ])
     ]);
