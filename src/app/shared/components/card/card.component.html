@@ -1,4 +1,4 @@
-<div [@flyLeftRigth]="!left" [@flyRigthLeft]="left" class="card text-center">
+<div [@flyLeftRigth]="left ? 'next' : 'previous'" [@flyLeftRigth]="!left" class="card text-center">
     <div class="card-body">
         <ng-content select="[header]"></ng-content>
     </div>
