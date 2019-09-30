@@ -1,9 +1,9 @@
 <nav class="navbar navbar-ligth bg-ligth border-bottom side-bar-icon">
-    <a href="#" class="navbar-brand">
-        <i class="fa fa-bars"></i>
+    <a class="navbar-brand">
+        <i class="fa fa-bars" (click)="toggleMenu()"></i>
     </a>
 </nav>
-<div class=" col-12 col-md-3 col-xl-3 sticky-top float-left side-bar">
+<div @slideDownUp *ngIf="showMenu" class="col-12 col-md-3 col-xl-3 sticky-top float-left border-right shadow side-bar">
     <ul class="nav-tabs list-unstyled">
         <li class="nav-item">
             <a class="nav-link" href="#" routerLink="/vagas" routerLinkActive="active">Vagas</a>
@@ -19,6 +19,6 @@
         </li>
     </ul>
 </div>
-<div class="col-12 col-md-9 col-xl-9 float-rigth d-flex">
+<div *ngIf="showBody" class="col-12 col-md-9 col-xl-9 float-rigth d-flex justify-content-center">
     <router-outlet></router-outlet>
 </div>

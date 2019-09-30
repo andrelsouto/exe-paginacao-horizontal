@@ -1,8 +1,13 @@
-<div *ngFor="let setor of vagas" class="card-group">
+<div *ngFor="let setor of vagas" class="card-group text-center">
     <button [disabled]="setor.setor_page === 1" type="button" class="btn btn-outline-primary" (click)="previousPage(setor)"><i class="fa fa-angle-left"></i></button>
-    <est-card *ngFor="let v of setor.qtd_vagas | perPage : setor.qtd_vagas.length : perPage : setor.setor_page; index as i" [vaga]="v" [left]="left">
-        <h5 class="card-title" header>Vaga</h5>
-        <a href="#" class="card-link" body>Vazia</a>
-    </est-card>
+    <ng-template ngFor let-v [ngForOf]="setor.qtd_vagas | perPage : setor.qtd_vagas.length : perPage : setor.setor_page" let-i="index">
+        <est-card *ngIf="!v.ocupar; else elseBlock" [vaga]="v.desc" [left]="left" class="p-1">
+            <h5 class="card-title" header>Vaga</h5>
+            <button (click)="exibirCadastro(v)" class="btn btn-success" body>Ocupar</button>
+        </est-card>
+        <ng-template #elseBlock>
+            <est-cadastro (voltar)="v.ocupar = !v.ocupar" class="p-1"></est-cadastro>
+        </ng-template>
+    </ng-template>
     <button [disabled]="setor.max_pages === setor.setor_page" type="button" class="btn btn-outline-primary" (click)="nextPage(setor)"><i class="fa fa-angle-right"></i></button>
 </div>

@@ -1,18 +1,21 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
+
+import { borderColorAnimation } from 'src/app/shared/animations/border-color.animation';
 
 @Component({
   selector: 'est-vagas',
   templateUrl: './vagas.component.html',
-  styleUrls: ['./vagas.component.css']
+  styleUrls: ['./vagas.component.css'],
+  animations: [borderColorAnimation]
 })
 export class VagasComponent implements OnInit {
 
-  vagas: any = [
-    { setor: 'A', qtd_vagas: ['a1', 'a2', 'a3', 'a4', 'a6', 'a7', 'a8', 'a9'], setor_page: 1 },
-    { setor: 'B', qtd_vagas: ['b1', 'b2', 'b3', 'b4', 'b6', 'b7', 'b8', 'b9', 'b10'], setor_page: 1 },
-    { setor: 'C', qtd_vagas: ['c1', 'c2', 'c3', 'c4', 'c6', 'c7', 'c8', 'c9', 'c10', 'c11'], setor_page: 1 },
-    { setor: 'D', qtd_vagas: ['d1', 'd2', 'd3', 'd4', 'd6', 'd7', 'd8', 'd9', 'd10', 'd11', 'd12', 'd13', 'd14', 'd15', 'd16', 'd17', 'd18', 'd19'], setor_page: 1 },
-    { setor: 'E', qtd_vagas: ['e1', 'e2', 'e3', 'e4', 'e6', 'e7', 'e8', 'e9', 'e10', 'e11', 'e12', 'e13'], setor_page: 1 }
+  vagas: any[] = [
+    { setor: 'A', qtd_vagas: [{ situacao: { codigo: 1 }, desc:'a1'}, { situacao: { codigo: 1 }, desc:'a2'}, { situacao: { codigo: 1 }, desc:'a3'}, { situacao: { codigo: 1 }, desc:'a4'}, { situacao: { codigo: 1 }, desc:'a6'}, { situacao: { codigo: 1 }, desc:'a7'}, { situacao: { codigo: 1 }, desc:'a8'}, { situacao: { codigo: 1 }, desc:'a9'}], setor_page: 1 },
+    { setor: 'B', qtd_vagas: [{ situacao: { codigo: 1 }, desc: 'b1'}, { situacao: { codigo: 1 }, desc: 'b2'}, { situacao: { codigo: 1 }, desc: 'b3'}, { situacao: { codigo: 1 }, desc: 'b4'}, { situacao: { codigo: 1 }, desc: 'b6'}, { situacao: { codigo: 1 }, desc: 'b7'}, { situacao: { codigo: 1 }, desc: 'b8'}, { situacao: { codigo: 1 }, desc: 'b9'}, { situacao: { codigo: 1 }, desc: 'b10'}], setor_page: 1 },
+    { setor: 'C', qtd_vagas: [{ situacao: { codigo: 1 }, desc: 'c1'}, { situacao: { codigo: 1 }, desc: 'c2'}, { situacao: { codigo: 1 }, desc: 'c3'}, { situacao: { codigo: 1 }, desc: 'c4'}, { situacao: { codigo: 1 }, desc: 'c6'}, { situacao: { codigo: 1 }, desc: 'c7'}, { situacao: { codigo: 1 }, desc: 'c8'}, { situacao: { codigo: 1 }, desc: 'c9'}, { situacao: { codigo: 1 }, desc: 'c10'}, { situacao: { codigo: 1 }, desc: 'c11'}], setor_page: 1 },
+    { setor: 'D', qtd_vagas: [{ situacao: { codigo: 1 }, desc: 'd1'}, { situacao: { codigo: 1 }, desc: 'd2'}, { situacao: { codigo: 1 }, desc: 'd3'}, { situacao: { codigo: 1 }, desc: 'd4'}, { situacao: { codigo: 1 }, desc: 'd6'}, { situacao: { codigo: 1 }, desc: 'd7'}, { situacao: { codigo: 1 }, desc: 'd8'}, { situacao: { codigo: 1 }, desc: 'd9'}, { situacao: { codigo: 1 }, desc: 'd10'}, { situacao: { codigo: 1 }, desc: 'd11'}, { situacao: { codigo: 1 }, desc: 'd12'}, { situacao: { codigo: 1 }, desc: 'd13'}, { situacao: { codigo: 1 }, desc: 'd14'}, { situacao: { codigo: 1 }, desc: 'd15'}, { situacao: { codigo: 1 }, desc: 'd16'}, { situacao: { codigo: 1 }, desc: 'd17'}, { situacao: { codigo: 1 }, desc: 'd18'}, { situacao: { codigo: 1 }, desc: 'd19'}], setor_page: 1 },
+    { setor: 'E', qtd_vagas: [{ situacao: { codigo: 1 }, desc: 'e1'}, { situacao: { codigo: 1 }, desc: 'e2'}, { situacao: { codigo: 1 }, desc: 'e3'}, { situacao: { codigo: 1 }, desc: 'e4'}, { situacao: { codigo: 1 }, desc: 'e6'}, { situacao: { codigo: 1 }, desc: 'e7'}, { situacao: { codigo: 1 }, desc: 'e8'}, { situacao: { codigo: 1 }, desc: 'e9'}, { situacao: { codigo: 1 }, desc: 'e10'}, { situacao: { codigo: 1 }, desc: 'e11'}, { situacao: { codigo: 1 }, desc: 'e12'}, { situacao: { codigo: 1 }, desc: 'e13'}], setor_page: 1 }
   ];
   perPage: number;
   left = true;
@@ -25,7 +28,10 @@ export class VagasComponent implements OnInit {
 
   @HostListener('window:resize') onResize() {
     this.setNumberOfPage();
-    this.vagas.forEach(v => v.setor_page = 1);
+    this.vagas.forEach(v => {
+      v.setor_page = 1;
+      v.qtd_vagas.forEach(vaga => vaga.ocupar = false);
+    });
   }
 
   nextPage(setor) {
@@ -36,6 +42,10 @@ export class VagasComponent implements OnInit {
   previousPage(setor) {
     setor.setor_page--;
     this.left = false;
+  }
+
+  exibirCadastro(vaga) {
+    vaga.ocupar = !vaga.ocupar;
   }
 
   private setNumberOfPage() {

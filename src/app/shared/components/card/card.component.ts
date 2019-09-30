@@ -1,20 +1,20 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { flyLeftToRigthAnimation, flyRigthToLeftAnimation } from '../../animations/fly-left-rigth';
+import { flyLeftToRigthAnimation } from '../../animations/fly-left-rigth.animation';
 
 @Component({
   selector: 'est-card',
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css'],
   animations: [
-    flyLeftToRigthAnimation,
-    flyRigthToLeftAnimation
+    flyLeftToRigthAnimation
   ]
 })
 export class CardComponent implements OnInit {
 
   @Input() vaga = '';
   @Input() left = true;
+  placa;
 
   constructor() { }
 

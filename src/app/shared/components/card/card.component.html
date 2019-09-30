@@ -2,9 +2,9 @@
     <div class="card-body">
         <ng-content select="[header]"></ng-content>
     </div>
-    <ul class="list-group list-group-flush">
+    <ul *ngIf="placa || vaga" class="list-group list-group-flush">
         <li class="list-group-item">{{ vaga | uppercase }}</li>
-        <li class="list-group-item">ASD-1234</li>
+        <li *ngIf="placa" class="list-group-item">{{ placa }}</li>
     </ul>
     <div class="card-body">
         <ng-content select="[body]"></ng-content>
